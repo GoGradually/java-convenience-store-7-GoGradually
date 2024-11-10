@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NullPromotionTest {
     @Test
-    void NullPromotion_객체_동작_테스트(){
+    void NullPromotion_객체_동작_테스트() {
         NullPromotion instance = NullPromotion.getInstance();
-        assertThat(instance.isPromotable(LocalDate.of(2000,1,1))).isFalse();
+        assertThat(instance.isPromotable(LocalDate.of(2000, 1, 1))).isFalse();
         assertThat(instance.getBuy()).isEqualTo(10000);
         assertThat(instance.getAddableAmount(10000)).isZero();
         assertThat(instance.getAddableAmount(10000)).isZero();
