@@ -1,4 +1,6 @@
-package store;
+package store.products;
+
+import store.promotion.Promotion;
 
 public class Product {
     private static final String ERROR_MESSAGE = "[ERROR] ";

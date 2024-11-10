@@ -1,12 +1,11 @@
 package store;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import store.promotion.NullPromotion;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class NullPromotionTest {
     private static final int OVER_BUY = 10000;

@@ -1,4 +1,10 @@
-package store;
+package store.conveniencestore;
+
+import store.products.Product;
+import store.products.Products;
+import store.promotion.NullPromotion;
+import store.promotion.Promotion;
+import store.promotion.PromotionImpl;
 
 import java.io.IOException;
 import java.nio.file.Files;

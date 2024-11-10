@@ -1,4 +1,7 @@
-package store;
+package store.view;
+
+import store.products.Products;
+import store.products.ProductsDto;
 
 import java.util.List;
 import java.util.Map;
