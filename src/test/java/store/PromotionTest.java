@@ -40,7 +40,7 @@ class PromotionTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,0", "0,1", "0,0", "11,11", "11,1", "1, 11"}, delimiter = ',')
+    @CsvSource(value = {"-1,1", "1,0", "0,1", "0,0", "11,11", "11,1", "1, 11"}, delimiter = ',')
     void 프로모션_객체_생성_실패_비정상_수량(int buy, int get) {
         String promotionName = "sample";
         LocalDate startDate = LocalDate.of(2024, 1, 1);
@@ -114,7 +114,7 @@ class PromotionTest {
 
     @ParameterizedTest
     @CsvSource({"1,0", "2,0", "3,1"})
-    void 무료_수량_계산(int offer, int free){
+    void 무료_수량_계산(int offer, int free) {
         String promotionName = "sample";
         int buy = 2;
         int get = 1;
