@@ -32,4 +32,8 @@ public class Products {
             return p.getPromotion().getBuy() - q.getPromotion().getBuy();
         });
     }
+
+    public boolean notContainNullPromotion() {
+        return products.stream().noneMatch(p -> p.getPromotion().getBuy() == 10000);
+    }
 }

@@ -58,6 +58,7 @@ public class ConvenienceStore {
             throw new RuntimeException(ERROR_MESSAGE + "상품 정보를 읽어오는데 실패했습니다.");
         }
         enrollProduct(productsInfos);
+        enrollEmptyProduct();
     }
 
     private void enrollProduct(List<String> productsInfos) {
@@ -78,5 +79,17 @@ public class ConvenienceStore {
         Products nowProducts = products.get(productName);
         Product newProduct = new Product(productName, amount, promotion);
         nowProducts.addProduct(newProduct);
+    }
+
+    private void enrollEmptyProduct() {
+        for (Products nowProducts : products.values()) {
+            if(nowProducts.notContainNullPromotion()){
+                nowProducts.addProduct(
+                        new Product(nowProducts.getName(),
+                                0,
+                                NullPromotion.getInstance()
+                        ));
+            };
+        }
     }
 }
