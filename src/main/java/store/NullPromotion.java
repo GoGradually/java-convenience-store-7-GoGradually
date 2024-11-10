@@ -3,7 +3,7 @@ package store;
 import java.time.LocalDate;
 
 public class NullPromotion implements Promotion {
-
+    private static final int OVER_BUY = 10000;
     private static NullPromotion INSTANCE = new NullPromotion();
 
 
@@ -18,7 +18,7 @@ public class NullPromotion implements Promotion {
 
     @Override
     public int getBuy() {
-        return 10000;
+        return OVER_BUY;
     }
 
     @Override

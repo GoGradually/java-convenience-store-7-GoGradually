@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Products {
+    private static final int OVER_BUY = 10000;
     private String name;
     private int price;
     private static final List<Product> products = new ArrayList<>();
@@ -34,6 +35,6 @@ public class Products {
     }
 
     public boolean notContainNullPromotion() {
-        return products.stream().noneMatch(p -> p.getPromotion().getBuy() == 10000);
+        return products.stream().noneMatch(p -> p.getPromotion().getBuy() == OVER_BUY);
     }
 }
