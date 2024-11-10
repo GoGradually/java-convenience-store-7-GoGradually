@@ -16,52 +16,79 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PromotionTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
+
     @Test
-    void 프로모션_객체_생성_성공(){
+    void 프로모션_객체_생성_성공() {
         String promotionName = "sample";
         int buy = 2;
         int get = 1;
-        LocalDate startDate = LocalDate.of(2024,1,1);
+        LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate endDate = LocalDate.of(2024, 12, 31);
 
         Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
     }
 
     @Test
-    void 프로모션_객체_생성_실패_비정상_날짜(){
+    void 프로모션_객체_생성_실패_비정상_날짜() {
         String promotionName = "sample";
         int buy = 2;
         int get = 1;
-        LocalDate startDate = LocalDate.of(2024,1,1);
+        LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException()
-                .isThrownBy(() ->new Promotion(promotionName, buy, get, startDate, wrongEndDate))
-                .withMessageStartingWith(ERROR_MESSAGE);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Promotion(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
+
     @ParameterizedTest
     @CsvSource(value = {"1,0", "0,1", "0,0", "11,11", "11,1", "1, 11"}, delimiter = ',')
-    void 프로모션_객체_생성_실패_비정상_수량(int buy, int get){
+    void 프로모션_객체_생성_실패_비정상_수량(int buy, int get) {
         String promotionName = "sample";
-        LocalDate startDate = LocalDate.of(2024,1,1);
+        LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException()
-                .isThrownBy(() ->new Promotion(promotionName, buy, get, startDate, wrongEndDate))
-                .withMessageStartingWith(ERROR_MESSAGE);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Promotion(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
+
     @ParameterizedTest
     @NullSource
     @EmptySource
     @ValueSource(strings = {" ", "  "})
-    void 프로모션_객체_생성_실패_비정상_이름(String promotionName){
+    void 프로모션_객체_생성_실패_비정상_이름(String promotionName) {
         int buy = 2;
         int get = 1;
-        LocalDate startDate = LocalDate.of(2024,1,1);
+        LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException()
-                .isThrownBy(() ->new Promotion(promotionName, buy, get, startDate, wrongEndDate))
-                .withMessageStartingWith(ERROR_MESSAGE);
+        assertThatIllegalArgumentException().isThrownBy(() -> new Promotion(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"2023,12,31", "2025,1,1"})
+    void 프로모션_적용_불가능(int year, int month, int day) {
+        String promotionName = "sample";
+        int buy = 2;
+        int get = 1;
+        LocalDate startDate = LocalDate.of(2024, 1, 1);
+        LocalDate endDate = LocalDate.of(2024, 12, 31);
+        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+
+        LocalDate testDate = LocalDate.of(year, month, day);
+
+        assertThat(promotion.isPromotable(testDate)).isFalse();
+    }
+
+    @ParameterizedTest
+    @CsvSource({"2024,1,31", "2024,12,1"})
+    void 프로모션_적용_가능(int year, int month, int day) {
+        String promotionName = "sample";
+        int buy = 2;
+        int get = 1;
+        LocalDate startDate = LocalDate.of(2024, 1, 1);
+        LocalDate endDate = LocalDate.of(2024, 12, 31);
+        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+
+        LocalDate testDate = LocalDate.of(year, month, day);
+
+        assertThat(promotion.isPromotable(testDate)).isTrue();
     }
 }
