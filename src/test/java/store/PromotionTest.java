@@ -25,7 +25,7 @@ class PromotionTest {
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate endDate = LocalDate.of(2024, 12, 31);
 
-        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+        Promotion promotion = new PromotionImpl(promotionName, buy, get, startDate, endDate);
     }
 
     @Test
@@ -36,7 +36,7 @@ class PromotionTest {
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Promotion(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
+        assertThatIllegalArgumentException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
 
     @ParameterizedTest
@@ -46,7 +46,7 @@ class PromotionTest {
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Promotion(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
+        assertThatIllegalArgumentException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
 
     @ParameterizedTest
@@ -59,7 +59,7 @@ class PromotionTest {
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new Promotion(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
+        assertThatIllegalArgumentException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
 
     @ParameterizedTest
@@ -70,7 +70,7 @@ class PromotionTest {
         int get = 1;
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate endDate = LocalDate.of(2024, 12, 31);
-        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+        Promotion promotion = new PromotionImpl(promotionName, buy, get, startDate, endDate);
 
         LocalDate testDate = LocalDate.of(year, month, day);
 
@@ -85,7 +85,7 @@ class PromotionTest {
         int get = 1;
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate endDate = LocalDate.of(2024, 12, 31);
-        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+        Promotion promotion = new PromotionImpl(promotionName, buy, get, startDate, endDate);
 
         LocalDate testDate = LocalDate.of(year, month, day);
 
@@ -107,7 +107,7 @@ class PromotionTest {
         String promotionName = "sample";
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate endDate = LocalDate.of(2024, 12, 31);
-        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+        Promotion promotion = new PromotionImpl(promotionName, buy, get, startDate, endDate);
 
         assertThat(promotion.getAddableAmount(offer)).isEqualTo(addable);
     }
@@ -120,7 +120,7 @@ class PromotionTest {
         int get = 1;
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate endDate = LocalDate.of(2024, 12, 31);
-        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+        Promotion promotion = new PromotionImpl(promotionName, buy, get, startDate, endDate);
 
         assertThat(promotion.getFreeAmount(offer)).isEqualTo(free);
     }

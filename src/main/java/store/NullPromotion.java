@@ -2,25 +2,22 @@ package store;
 
 import java.time.LocalDate;
 
-public class NullPromotion extends Promotion {
-    private static NullPromotion INSTANCE = new NullPromotion(
-            "null",
-            10000,
-            0,
-            LocalDate.of(2000,1,1),
-            LocalDate.of(2000,1,1)
-    );
+public class NullPromotion implements Promotion {
 
-    private NullPromotion(String promotionName, int buy, int get, LocalDate startDate, LocalDate endDate) {
-        super(promotionName, buy, get, startDate, endDate);
-    }
+    private static NullPromotion INSTANCE = new NullPromotion();
 
-    public static NullPromotion getInstance(){
+
+    public static NullPromotion getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public int getBuy(){
+    public boolean isPromotable(LocalDate date) {
+        return false;
+    }
+
+    @Override
+    public int getBuy() {
         return 10000;
     }
 
