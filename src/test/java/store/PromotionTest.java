@@ -114,4 +114,17 @@ class PromotionTest {
 
         assertThat(promotion.getAddableAmount(offer)).isEqualTo(addable);
     }
+
+    @ParameterizedTest
+    @CsvSource({"1,0", "2,0", "3,1"})
+    void 무료_수량_계산(int offer, int free){
+        String promotionName = "sample";
+        int buy = 2;
+        int get = 1;
+        LocalDate startDate = LocalDate.of(2024, 1, 1);
+        LocalDate endDate = LocalDate.of(2024, 12, 31);
+        Promotion promotion = new Promotion(promotionName, buy, get, startDate, endDate);
+
+        assertThat(promotion.getFreeAmount(offer)).isEqualTo(free);
+    }
 }
