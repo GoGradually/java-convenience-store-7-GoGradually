@@ -23,7 +23,7 @@ public class Promotion {
     }
 
     public int getAddableAmount(int offer) {
-        return Math.max((offer + get) / (buy + get) * (buy + get) - offer, 0);
+        return Math.max((offer + get)  - (offer + get) % (buy + get) - offer, 0);
     }
 
     public int getFreeAmount(int offer) {
@@ -32,11 +32,11 @@ public class Promotion {
 
     private void validatePromotion(String promotionName, int buy, int get, LocalDate startDate, LocalDate endDate) {
         if (promotionName == null || promotionName.isEmpty() || promotionName.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다. 재고를 다시 확인해주세요.");
-        } else if (buy == 0 || get == 0 || buy > 10 || get > 10) {
-            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다. 재고를 다시 확인해주세요.");
+            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
+        } else if (buy == 0 || buy > 10 || get != 1) {
+            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
         } else if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다. 재고를 다시 확인해주세요.");
+            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
         }
     }
 }
