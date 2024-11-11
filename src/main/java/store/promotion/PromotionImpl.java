@@ -49,6 +49,11 @@ public class PromotionImpl implements Promotion {
         return false;
     }
 
+    @Override
+    public int getSum() {
+        return get + buy;
+    }
+
     private void validatePromotion(String promotionName, int buy, int get, LocalDate startDate, LocalDate endDate) {
         if (promotionName == null || promotionName.isEmpty() || promotionName.isBlank()) {
             throw new RuntimeException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");

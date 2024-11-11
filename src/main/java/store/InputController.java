@@ -36,20 +36,17 @@ public class InputController {
         String input = readLine();
         List<Order> orders = new ArrayList<>();
         for (String s : input.split(",")) {
-            if (s.isBlank()) {
-                throw new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
-            }
-            if (!s.startsWith("[") || !s.endsWith("]"))
-                throw new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
-            s = s.substring(1, s.length() - 1);
+            validateOrderInput(s);
+            s = peelBlank(s);
             String[] split = s.split("-");
-            try {
-                orders.add(new Order(split[0], Integer.parseInt(split[1])));
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
-            }
+            addOrder(orders, split);
         }
         return orders;
+    }
+
+    private String peelBlank(String s) {
+        s = s.substring(1, s.length() - 1);
+        return s;
     }
 
     public void receiveOrder(List<Order> orders) {
@@ -75,8 +72,9 @@ public class InputController {
     private void askPromotionAddable(OrderingProduct orderingProduct) {
         if (!orderingProduct.isAddable()) return;
         Product product = orderingProduct.getProduct();
-        String format = String.format("현재 %s은(는) 1개를 무료로 더 받을 수 있습니다. 추가하시겠습니까? (Y/N)", product.getName());
-
+        String format = String.format(
+                "현재 %s은(는) 1개를 무료로 더 받을 수 있습니다. 추가하시겠습니까? (Y/N)",
+                product.getName());
         if (askUserTF(format)) {
             orderingProduct.addPromotionalCount();
         }
@@ -87,9 +85,27 @@ public class InputController {
 
         Product product = orderingProduct.getProduct();
         int uncontainableAmount = orderingProduct.getUncontainableAmount();
-        String format = String.format("현재 %s %d개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)", product.getName(), uncontainableAmount);
+
+        String format = String.format("현재 %s %d개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)",
+                product.getName(), uncontainableAmount);
         if (askUserTF(format)) {
             orderingProduct.excludeOverPromotion();
         }
+    }
+
+    private void addOrder(List<Order> orders, String[] split) {
+        try {
+            orders.add(new Order(split[0], Integer.parseInt(split[1])));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private void validateOrderInput(String s) {
+        if (s.isBlank()) {
+            throw new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
+        }
+        if (!s.startsWith("[") || !s.endsWith("]"))
+            throw new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
     }
 }

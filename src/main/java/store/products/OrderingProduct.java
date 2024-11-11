@@ -17,7 +17,9 @@ public class OrderingProduct {
     public OrderingProduct(Product product, int offer) {
         this.product = product;
         this.offer = offer;
+        if (product.getPromotion().isNullPromotion()) return;
         setDefaultPromotionalCount();
+        setPromotionalPossiblity();
     }
 
     public Product getProduct() {
@@ -45,7 +47,7 @@ public class OrderingProduct {
     }
 
     public int getUncontainableAmount() {
-        return offer - promotionalAmount * (product.getPromotion().getBuy() + product.getPromotion().getAdd());
+        return offer - promotionalAmount * product.getPromotion().getSum();
     }
 
     public void setAddable(boolean addable) {
@@ -68,13 +70,12 @@ public class OrderingProduct {
         Promotion promotion = product.getPromotion();
 
         if (product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now()))) {
-
             int promotionOffer = getPromotionOffer();
             int freeAmount = promotion.getFreeAmount(promotionOffer);
             setPromotionalAmount(freeAmount);
         }
 
-        if (promotionalAmount * (promotion.getBuy() + promotion.getAdd()) < offer) {
+        if (promotionalAmount * promotion.getSum() < offer) {
             setNonPromotional(true);
         }
     }
@@ -82,7 +83,7 @@ public class OrderingProduct {
     public void excludeOverPromotion() {
         Product product = getProduct();
         Promotion promotion = product.getPromotion();
-        setOffer(getPromotionalAmount() * (promotion.getBuy() + promotion.getAdd()));
+        setOffer(getPromotionalAmount() * promotion.getSum());
     }
 
     private void setDefaultPromotionalCount() {
@@ -94,5 +95,16 @@ public class OrderingProduct {
         setPromotionalAmount(promotion.getFreeAmount(promotionOffer));
     }
 
-
+    private void setPromotionalPossiblity() {
+        Promotion promotion = product.getPromotion();
+        if (product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now()))) {
+            int nowPromotionalAmount = getPromotionalAmount();
+            int addableAmount = promotion.getAddableAmount(nowPromotionalAmount);
+            if (addableAmount > 0 && nowPromotionalAmount + addableAmount <= product.getPromotionalAmount()) {
+                setAddable(true);
+            } else if (getPromotionalAmount() * promotion.getSum() < offer) {
+                setNonPromotional(true);
+            }
+        }
+    }
 }

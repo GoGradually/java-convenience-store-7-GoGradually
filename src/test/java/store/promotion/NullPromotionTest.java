@@ -1,4 +1,4 @@
-package store;
+package store.promotion;
 
 import org.junit.jupiter.api.Test;
 import store.promotion.NullPromotion;

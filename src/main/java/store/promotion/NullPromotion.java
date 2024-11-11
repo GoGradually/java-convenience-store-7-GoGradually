@@ -45,4 +45,9 @@ public class NullPromotion implements Promotion {
     public boolean isNullPromotion() {
         return true;
     }
+
+    @Override
+    public int getSum() {
+        return OVER_BUY;
+    }
 }

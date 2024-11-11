@@ -16,4 +16,6 @@ public interface Promotion {
     int getFreeAmount(int offer);
 
     boolean isNullPromotion();
+
+    int getSum();
 }

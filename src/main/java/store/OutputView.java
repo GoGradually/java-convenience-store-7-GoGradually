@@ -33,13 +33,20 @@ public class OutputView {
         if (product.getPromotion().isNullPromotion()) return;
         String stock = String.format("%,d", product.getPromotionalAmount()) + "개";
         if (stock.equals("0개")) stock = "재고 없음";
-        System.out.printf("- %s %s원 %s %s\n", product.getName(), String.format("%,d", convenienceStore.getPrice(product.getName())), stock, product.getPromotion().getName());
+        System.out.printf("- %s %s원 %s %s\n",
+                product.getName(),
+                String.format("%,d", convenienceStore.getPrice(product.getName())),
+                stock,
+                product.getPromotion().getName());
     }
 
     private void printNonPromotionProduct(Product product) {
         String stock = String.format("%,d", product.getNonPromotionalAmount()) + "개";
         if (stock.equals("0개")) stock = "재고 없음";
-        System.out.printf("- %s %s원 %s\n", product.getName(), String.format("%,d", convenienceStore.getPrice(product.getName())), stock);
+        System.out.printf("- %s %s원 %s\n",
+                product.getName(),
+                String.format("%,d", convenienceStore.getPrice(product.getName())),
+                stock);
     }
 
     public void printBill() {

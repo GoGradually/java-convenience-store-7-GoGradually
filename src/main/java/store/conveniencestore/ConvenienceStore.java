@@ -21,9 +21,8 @@ public class ConvenienceStore {
     private final Map<String, Product> products = new HashMap<>();
     private final Map<String, Integer> priceTags = new HashMap<>();
 
-    public void setUp() {
-        enrollPromotions();
-        enrollProducts();
+    public ConvenienceStore() {
+        setUp();
     }
 
     public Product getProduct(String productsName) {
@@ -36,6 +35,11 @@ public class ConvenienceStore {
 
     public List<Product> getProducts() {
         return products.values().stream().toList();
+    }
+
+    private void setUp() {
+        enrollPromotions();
+        enrollProducts();
     }
 
     private void enrollPromotions() {
