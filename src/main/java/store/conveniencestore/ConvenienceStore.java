@@ -20,6 +20,7 @@ public class ConvenienceStore {
     private static final String PRODUCTS_PATH = "src/main/resources/products.md";
     private final Map<String, Promotion> promotions = new HashMap<>();
     private final Map<String, Products> products = new HashMap<>();
+    private final Map<String, Integer> priceTags = new HashMap<>();
 
     public void setUp() {
         enrollPromotions();
@@ -75,27 +76,33 @@ public class ConvenienceStore {
             int amount = Integer.parseInt(split[2]);
             Promotion promotion = promotions.get(split[3]);
             addProductInProducts(productName, price, amount, promotion);
+            putPriceTag(productName, price);
         }
     }
 
     private void addProductInProducts(String productName, int price, int amount, Promotion promotion) {
         if (products.get(productName) == null) {
-            products.put(productName, new Products(productName, price));
+            products.put(productName, new Products(productName));
         }
         Products nowProducts = products.get(productName);
         Product newProduct = new Product(productName, amount, promotion);
         nowProducts.addProduct(newProduct);
     }
 
+    private void putPriceTag(String productName, int price) {
+        priceTags.put(productName, price);
+    }
+
     private void enrollEmptyProduct() {
         for (Products nowProducts : products.values()) {
-            if(nowProducts.notContainNullPromotion()){
+            if (nowProducts.notContainNullPromotion()) {
                 nowProducts.addProduct(
                         new Product(nowProducts.getName(),
                                 0,
                                 NullPromotion.getInstance()
                         ));
-            };
+            }
+            ;
         }
     }
 }

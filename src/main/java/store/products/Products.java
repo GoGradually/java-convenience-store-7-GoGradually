@@ -6,20 +6,14 @@ import java.util.List;
 public class Products {
     private static final int OVER_BUY = 10000;
     private String name;
-    private int price;
     private static final List<Product> products = new ArrayList<>();
 
-    public Products(String name, int price) {
+    public Products(String name) {
         this.name = name;
-        this.price = price;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public void addProduct(Product product) {
