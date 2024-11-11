@@ -16,8 +16,16 @@ public class Application {
             InputController inputController = new InputController(cashier);
             OutputView outputView = new OutputView(cashier, convenienceStore);
             outputView.ListUpProducts();
-            List<Order> orders = inputController.inputOrders();
-            cashier.checkOrder(orders);
+            List<Order> orders;
+            while (true){
+                try{
+                    orders = inputController.inputOrders();
+                    cashier.checkOrder(orders);
+                    break;
+                }catch (IllegalArgumentException e){
+                    System.out.println(e.getMessage());
+                }
+            }
             inputController.receiveOrder(orders);
             inputController.askMembership();
             outputView.printBill();
