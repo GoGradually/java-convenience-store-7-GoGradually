@@ -1,8 +1,6 @@
 package store.conveniencestore;
 
-import store.conveniencestore.ConvenienceStore;
 import store.products.OrderedProducts;
-import store.products.Products;
 import store.view.InputView;
 import store.view.OutputView;
 

@@ -1,7 +1,6 @@
 package store.conveniencestore;
 
 import store.products.Product;
-import store.products.Products;
 import store.promotion.NullPromotion;
 import store.promotion.Promotion;
 import store.promotion.PromotionImpl;
@@ -19,7 +18,7 @@ public class ConvenienceStore {
     private static final String PROMOTION_PATH = "src/main/resources/promotions.md";
     private static final String PRODUCTS_PATH = "src/main/resources/products.md";
     private final Map<String, Promotion> promotions = new HashMap<>();
-    private final Map<String, Products> products = new HashMap<>();
+    private final Map<String, Product> products = new HashMap<>();
     private final Map<String, Integer> priceTags = new HashMap<>();
 
     public void setUp() {
@@ -27,7 +26,7 @@ public class ConvenienceStore {
         enrollProducts();
     }
 
-    public Products getProducts(String productsName) {
+    public Product getProducts(String productsName) {
         return products.get(productsName);
     }
 
@@ -73,7 +72,6 @@ public class ConvenienceStore {
             throw new RuntimeException(ERROR_MESSAGE + "상품 정보를 읽어오는데 실패했습니다.");
         }
         enrollProduct(productsInfos);
-        enrollEmptyProduct();
     }
 
     private void enrollProduct(List<String> productsInfos) {
@@ -83,34 +81,25 @@ public class ConvenienceStore {
             int price = Integer.parseInt(split[1]);
             int amount = Integer.parseInt(split[2]);
             Promotion promotion = promotions.get(split[3]);
-            addProductInProducts(productName, price, amount, promotion);
+            addProductInProducts(productName, amount, promotion);
             putPriceTag(productName, price);
         }
     }
 
-    private void addProductInProducts(String productName, int price, int amount, Promotion promotion) {
+    private void addProductInProducts(String productName, int amount, Promotion promotion) {
         if (products.get(productName) == null) {
-            products.put(productName, new Products(productName));
+            products.put(productName, new Product(productName, NullPromotion.getInstance()));
         }
-        Products nowProducts = products.get(productName);
-        Product newProduct = new Product(productName, amount, promotion);
-        nowProducts.addProduct(newProduct);
+        Product nowProduct = products.get(productName);
+        if(promotion.isNullPromotion()){
+            nowProduct.setNonPromotionalAmount(amount);
+            return;
+        }
+        nowProduct.setPromotion(promotion);
+        nowProduct.setPromotionalAmount(amount);
     }
 
     private void putPriceTag(String productName, int price) {
         priceTags.put(productName, price);
-    }
-
-    private void enrollEmptyProduct() {
-        for (Products nowProducts : products.values()) {
-            if (nowProducts.notContainNullPromotion()) {
-                nowProducts.addProduct(
-                        new Product(nowProducts.getName(),
-                                0,
-                                NullPromotion.getInstance()
-                        ));
-            }
-            ;
-        }
     }
 }

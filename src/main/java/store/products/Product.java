@@ -3,27 +3,42 @@ package store.products;
 import store.promotion.Promotion;
 
 public class Product {
-    private static final String ERROR_MESSAGE = "[ERROR] ";
     private String name;
-    private int amount;
+    private int nonPromotionalAmount;
+    private int promotionalAmount;
+
     private Promotion promotion;
 
-    public Product(String name, int amount, Promotion promotion) {
+    public Product(String name, Promotion promotion) {
         this.name = name;
-        this.amount = amount;
         this.promotion = promotion;
     }
 
-    public Promotion getPromotion() {
-        return promotion;
+    public int getNonPromotionalAmount() {
+        return nonPromotionalAmount;
     }
 
-    public int sellProduct(int offer) {
-        int actualCalculatedAmount = offer;
-        if (actualCalculatedAmount > amount) {
-            actualCalculatedAmount = amount;
-        }
-        amount -= actualCalculatedAmount;
-        return actualCalculatedAmount;
+    public int getPromotionalAmount() {
+        return promotionalAmount;
+    }
+
+    public int getAllAmount() {
+        return nonPromotionalAmount + promotionalAmount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setNonPromotionalAmount(int nonPromotionalAmount) {
+        this.nonPromotionalAmount = nonPromotionalAmount;
+    }
+
+    public void setPromotionalAmount(int promotionalAmount) {
+        this.promotionalAmount = promotionalAmount;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
     }
 }

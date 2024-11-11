@@ -30,4 +30,9 @@ public class NullPromotion implements Promotion {
     public int getFreeAmount(int offer) {
         return 0;
     }
+
+    @Override
+    public boolean isNullPromotion() {
+        return true;
+    }
 }
