@@ -1,12 +1,30 @@
 package store.conveniencestore;
 
 import store.conveniencestore.ConvenienceStore;
+import store.products.OrderedProducts;
+import store.products.Products;
+import store.view.InputView;
+import store.view.OutputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cashier {
-    private final ConvenienceStore cs;
+    private final ConvenienceStore convenienceStore;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public Cashier(ConvenienceStore cs) {
-        this.cs = cs;
+    private List<OrderedProducts> nonPromotionalProducts = new ArrayList<>();
+    private List<OrderedProducts> promotionalProducts = new ArrayList<>();
+
+    public Cashier(ConvenienceStore convenienceStore, InputView inputView, OutputView outputView) {
+        this.convenienceStore = convenienceStore;
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
+    // Todo
+    public void receiveOrder(String productsName, int offer){
     }
 
 }
