@@ -42,28 +42,8 @@ public class OrderingProduct {
         return nonPromotional;
     }
 
-    public int getPromotionOffer() {
-        return min(offer, product.getPromotionalAmount());
-    }
-
     public int getUncontainableAmount() {
         return offer - promotionalAmount * product.getPromotion().getSum();
-    }
-
-    public void setAddable(boolean addable) {
-        this.addable = addable;
-    }
-
-    public void setNonPromotional(boolean nonPromotional) {
-        this.nonPromotional = nonPromotional;
-    }
-
-    public void setOffer(int offer) {
-        this.offer = offer;
-    }
-
-    public void setPromotionalAmount(int promotionalAmount) {
-        this.promotionalAmount = promotionalAmount;
     }
 
     public void addPromotionalCount() {
@@ -83,6 +63,26 @@ public class OrderingProduct {
         Product product = getProduct();
         Promotion promotion = product.getPromotion();
         setOffer(getPromotionalAmount() * promotion.getSum());
+    }
+
+    private int getPromotionOffer() {
+        return min(offer, product.getPromotionalAmount());
+    }
+
+    private void setOffer(int offer) {
+        this.offer = offer;
+    }
+
+    private void setAddable(boolean addable) {
+        this.addable = addable;
+    }
+
+    private void setNonPromotional(boolean nonPromotional) {
+        this.nonPromotional = nonPromotional;
+    }
+
+    private void setPromotionalAmount(int promotionalAmount) {
+        this.promotionalAmount = promotionalAmount;
     }
 
     private void setDefaultPromotionalCount() {
