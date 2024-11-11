@@ -2,6 +2,9 @@ package store.products;
 
 import store.promotion.Promotion;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 public class Product {
     private String name;
     private int nonPromotionalAmount;
@@ -30,6 +33,10 @@ public class Product {
         return name;
     }
 
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
     public void setNonPromotionalAmount(int nonPromotionalAmount) {
         this.nonPromotionalAmount = nonPromotionalAmount;
     }
@@ -40,5 +47,12 @@ public class Product {
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
+    }
+
+    public void sell(int offer){
+        int promotionalOffer = min(promotionalAmount, offer);
+        int nonPromotionalOffer = offer - promotionalOffer;
+        promotionalAmount -= promotionalOffer;
+        nonPromotionalAmount -= nonPromotionalOffer;
     }
 }

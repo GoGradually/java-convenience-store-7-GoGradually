@@ -22,6 +22,11 @@ public class NullPromotion implements Promotion {
     }
 
     @Override
+    public int getAdd() {
+        return 0;
+    }
+
+    @Override
     public int getAddableAmount(int offer) {
         return 0;
     }

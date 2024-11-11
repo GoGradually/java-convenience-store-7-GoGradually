@@ -22,6 +22,11 @@ public class PromotionImpl implements Promotion {
         return buy;
     }
 
+    @Override
+    public int getAdd() {
+        return get;
+    }
+
     public boolean isPromotable(LocalDate date) {
         return !date.isAfter(endDate) && !date.isBefore(startDate);
     }

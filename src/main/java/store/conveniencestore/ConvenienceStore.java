@@ -26,7 +26,7 @@ public class ConvenienceStore {
         enrollProducts();
     }
 
-    public Product getProducts(String productsName) {
+    public Product getProduct(String productsName) {
         return products.get(productsName);
     }
 
@@ -87,9 +87,7 @@ public class ConvenienceStore {
     }
 
     private void addProductInProducts(String productName, int amount, Promotion promotion) {
-        if (products.get(productName) == null) {
-            products.put(productName, new Product(productName, NullPromotion.getInstance()));
-        }
+        products.computeIfAbsent(productName, n -> new Product(n, NullPromotion.getInstance()));
         Product nowProduct = products.get(productName);
         if(promotion.isNullPromotion()){
             nowProduct.setNonPromotionalAmount(amount);
