@@ -92,16 +92,7 @@ class PromotionTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,1,1,1",
-            "1,1,2,0",
-            "2,1,1,0",
-            "2,1,2,1",
-            "2,1,3,0",
-            "3,1,1,0",
-            "3,1,2,0",
-            "3,1,3,1",
-            "3,1,4,0"
-    })
+    @CsvSource({"1,1,1,1", "1,1,2,0", "2,1,1,0", "2,1,2,1", "2,1,3,0", "3,1,1,0", "3,1,2,0", "3,1,3,1", "3,1,4,0"})
     void 추가구매_가능_수량_계산(int buy, int get, int offer, int addable) {
         String promotionName = "sample";
         LocalDate startDate = LocalDate.of(2024, 1, 1);

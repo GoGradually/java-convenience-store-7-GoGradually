@@ -49,7 +49,7 @@ public class Product {
         this.promotion = promotion;
     }
 
-    public void sell(int offer){
+    public void sell(int offer) {
         int promotionalOffer = min(promotionalAmount, offer);
         int nonPromotionalOffer = offer - promotionalOffer;
         promotionalAmount -= promotionalOffer;

@@ -46,7 +46,7 @@ public class Cashier {
         Product product = convenienceStore.getProduct(order.getProductName());
         Promotion promotion = product.getPromotion();
         OrderingProduct orderingProduct = new OrderingProduct(product, order.getOffer());
-        if(promotion.isNullPromotion()) return orderingProduct;
+        if (promotion.isNullPromotion()) return orderingProduct;
         if (product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now()))) {
             int nowPromotionalAmount = orderingProduct.getPromotionalAmount();
             int addableAmount = promotion.getAddableAmount(nowPromotionalAmount);

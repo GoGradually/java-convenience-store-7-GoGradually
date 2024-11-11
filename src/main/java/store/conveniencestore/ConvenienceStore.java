@@ -30,11 +30,11 @@ public class ConvenienceStore {
         return products.get(productsName);
     }
 
-    public int getPrice(String productsName){
+    public int getPrice(String productsName) {
         return priceTags.get(productsName);
     }
 
-    public List<Product> getProducts(){
+    public List<Product> getProducts() {
         return products.values().stream().toList();
     }
 
@@ -53,12 +53,7 @@ public class ConvenienceStore {
     private void enrollPromotion(List<String> promotionInfos) {
         for (int i = 1; i < promotionInfos.size(); i++) {
             String[] split = promotionInfos.get(i).split(",");
-            Promotion promotion = new PromotionImpl(
-                    split[0],
-                    Integer.parseInt(split[1]),
-                    Integer.parseInt(split[2]),
-                    LocalDate.parse(split[3]),
-                    LocalDate.parse(split[4]));
+            Promotion promotion = new PromotionImpl(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2]), LocalDate.parse(split[3]), LocalDate.parse(split[4]));
             promotions.put(split[0], promotion);
         }
     }
@@ -93,7 +88,7 @@ public class ConvenienceStore {
     private void addProductInProducts(String productName, int amount, Promotion promotion) {
         products.computeIfAbsent(productName, n -> new Product(n, NullPromotion.getInstance()));
         Product nowProduct = products.get(productName);
-        if(promotion.isNullPromotion()){
+        if (promotion.isNullPromotion()) {
             nowProduct.setNonPromotionalAmount(amount);
             return;
         }

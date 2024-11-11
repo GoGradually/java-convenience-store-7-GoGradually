@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
         ConvenienceStore convenienceStore = new ConvenienceStore();
         convenienceStore.setUp();
         while (true) {
@@ -17,12 +16,12 @@ public class Application {
             OutputView outputView = new OutputView(cashier, convenienceStore);
             outputView.ListUpProducts();
             List<Order> orders;
-            while (true){
-                try{
+            while (true) {
+                try {
                     orders = inputController.inputOrders();
                     cashier.checkOrder(orders);
                     break;
-                }catch (IllegalArgumentException e){
+                } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
                 }
             }
