@@ -27,6 +27,14 @@ public class ConvenienceStore {
         enrollProducts();
     }
 
+    public Products getProducts(String productsName) {
+        return products.get(productsName);
+    }
+
+    public int getPrice(String productsName){
+        return priceTags.get(productsName);
+    }
+
     private void enrollPromotions() {
         Path promotionPath = Path.of(PROMOTION_PATH);
         List<String> promotionInfos;
