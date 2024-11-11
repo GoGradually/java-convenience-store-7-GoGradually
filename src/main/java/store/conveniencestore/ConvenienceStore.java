@@ -57,7 +57,12 @@ public class ConvenienceStore {
     private void enrollPromotion(List<String> promotionInfos) {
         for (int i = 1; i < promotionInfos.size(); i++) {
             String[] split = promotionInfos.get(i).split(",");
-            Promotion promotion = new PromotionImpl(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2]), LocalDate.parse(split[3]), LocalDate.parse(split[4]));
+            Promotion promotion = new PromotionImpl(
+                    split[0],
+                    Integer.parseInt(split[1]),
+                    Integer.parseInt(split[2]),
+                    LocalDate.parse(split[3]),
+                    LocalDate.parse(split[4]));
             promotions.put(split[0], promotion);
         }
     }

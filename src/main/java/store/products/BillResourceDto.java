@@ -40,7 +40,9 @@ public class BillResourceDto {
         System.out.println("================증 정================");
         for (OrderedProduct orderedProduct : orderedProducts) {
             if (orderedProduct.getPromotionalAmount() == 0) continue;
-            System.out.printf("%s               %,d\n", orderedProduct.getProduct().getName(), orderedProduct.getPromotionalAmount());
+            System.out.printf("%s               %,d\n",
+                    orderedProduct.getProduct().getName(),
+                    orderedProduct.getPromotionalAmount());
         }
     }
 
@@ -48,7 +50,10 @@ public class BillResourceDto {
         System.out.println("===============W 편의점===============");
         System.out.println("상품명              수량      금액");
         for (OrderedProduct orderedProduct : orderedProducts) {
-            System.out.printf("%s               %,d     %,d\n", orderedProduct.getProduct().getName(), orderedProduct.getAmount(), orderedProduct.getPrice());
+            System.out.printf("%s               %,d     %,d\n",
+                    orderedProduct.getProduct().getName(),
+                    orderedProduct.getAmount(),
+                    orderedProduct.getPrice());
         }
     }
 }
