@@ -17,6 +17,11 @@ public class NullPromotion implements Promotion {
     }
 
     @Override
+    public String getName() {
+        return "";
+    }
+
+    @Override
     public int getBuy() {
         return OVER_BUY;
     }

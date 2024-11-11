@@ -14,14 +14,14 @@ public class Application {
         while (true) {
             Cashier cashier = new Cashier(convenienceStore);
             InputController inputController = new InputController(cashier);
-            OutputView outputView = new OutputView(cashier);
-
+            OutputView outputView = new OutputView(cashier, convenienceStore);
+            outputView.ListUpProducts();
             List<Order> orders = inputController.inputOrders();
             cashier.checkOrder(orders);
             inputController.receiveOrder(orders);
-
+            inputController.askMembership();
             outputView.printBill();
-            if (!inputController.askUserTF("감사합니다. 구매하고 싶은 다른 상품이 있으신가요? (Y/N)")) {
+            if (!inputController.askReuse()) {
                 break;
             }
         }

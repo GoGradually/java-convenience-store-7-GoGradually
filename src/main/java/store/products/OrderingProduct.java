@@ -87,11 +87,11 @@ public class OrderingProduct {
 
     private void setDefaultPromotionalCount() {
         Promotion promotion = product.getPromotion();
-        if (product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now()))) {
+        if (!(product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now())))) {
             return;
         }
         int promotionOffer = min(offer, product.getPromotionalAmount());
-        setPromotionalAmount(promotionOffer);
+        setPromotionalAmount(promotion.getFreeAmount(promotionOffer));
     }
 
 

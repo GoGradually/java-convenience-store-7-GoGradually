@@ -18,55 +18,60 @@ public class Cashier {
     private static final String ERROR_MESSAGE = "[ERROR] ";
     private final ConvenienceStore convenienceStore;
 
+    private boolean membership = false;
+
     private final List<OrderedProduct> orderedProducts = new ArrayList<>();
 
     public Cashier(ConvenienceStore convenienceStore) {
         this.convenienceStore = convenienceStore;
     }
 
+    public void setMembership(boolean membership) {
+        this.membership = membership;
+    }
+
     public void checkOrder(List<Order> orders) {
         for (Order order : orders) {
             Product product = convenienceStore.getProduct(order.getProductName());
+            if (product == null) {
+                throw new IllegalArgumentException(ERROR_MESSAGE + "존재하지 않는 상품입니다. 다시 입력해 주세요.");
+            }
             if (product.getAllAmount() < order.getOffer()) {
-                throw new IllegalArgumentException(
-                        ERROR_MESSAGE + "재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.");
+                throw new IllegalArgumentException(ERROR_MESSAGE + "재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.");
             }
         }
     }
+
     public OrderingProduct registerOrder(Order order) {
         Product product = convenienceStore.getProduct(order.getProductName());
         Promotion promotion = product.getPromotion();
         OrderingProduct orderingProduct = new OrderingProduct(product, order.getOffer());
+        if(promotion.isNullPromotion()) return orderingProduct;
         if (product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now()))) {
             int nowPromotionalAmount = orderingProduct.getPromotionalAmount();
             int addableAmount = promotion.getAddableAmount(nowPromotionalAmount);
             if (addableAmount > 0 && nowPromotionalAmount + addableAmount <= product.getPromotionalAmount()) {
                 orderingProduct.setAddable(true);
-            }
-            else if (orderingProduct.getPromotionalAmount() * (promotion.getBuy() + promotion.getAdd()) < order.getOffer()) {
+            } else if (orderingProduct.getPromotionalAmount() * (promotion.getBuy() + promotion.getAdd()) < order.getOffer()) {
                 orderingProduct.setNonPromotional(true);
             }
         }
         return orderingProduct;
     }
 
-    public void addOrderedProducts(OrderingProduct orderingProduct){
+    public void addOrderedProducts(OrderingProduct orderingProduct) {
         if (orderingProduct.getOffer() == 0) {
             return;
         }
-        orderedProducts.add(new OrderedProduct(orderingProduct));
+        orderedProducts.add(new OrderedProduct(orderingProduct, convenienceStore.getPrice(orderingProduct.getProduct().getName())));
     }
 
     public BillResourceDto getBillResourceDto() {
         int fullPrice = getFullPrice();
         int promotionDiscount = getPromotionDiscount();
-        int membershipDiscount = getMembershipDiscount();
-        return new BillResourceDto(
-                orderedProducts,
-                fullPrice,
-                promotionDiscount,
-                membershipDiscount
-        );
+        int membershipDiscount = 0;
+        if (membership) membershipDiscount = getMembershipDiscount();
+        return new BillResourceDto(orderedProducts, fullPrice, promotionDiscount, membershipDiscount);
     }
 
     public void sell() {
@@ -82,8 +87,7 @@ public class Cashier {
             int amount = orderedProduct.getAmount();
             int price = convenienceStore.getPrice(product.getName());
             int promotionalAmount = orderedProduct.getPromotionalAmount();
-            int nonPromotionalAmount = amount - promotionalAmount *
-                    (product.getPromotion().getAdd() + product.getPromotion().getBuy());
+            int nonPromotionalAmount = amount - promotionalAmount * (product.getPromotion().getAdd() + product.getPromotion().getBuy());
             membershipDiscount += price * nonPromotionalAmount;
         }
         membershipDiscount /= 10;
@@ -111,10 +115,6 @@ public class Cashier {
         }
         return fullPrice;
     }
-
-
-
-
 
 
 }

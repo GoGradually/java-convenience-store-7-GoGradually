@@ -3,6 +3,7 @@ package store.promotion;
 import java.time.LocalDate;
 
 public interface Promotion {
+    String getName();
 
     int getBuy();
 

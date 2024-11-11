@@ -18,6 +18,11 @@ public class PromotionImpl implements Promotion {
         this.endDate = endDate;
     }
 
+    @Override
+    public String getName() {
+        return promotionName;
+    }
+
     public int getBuy() {
         return buy;
     }
@@ -46,11 +51,11 @@ public class PromotionImpl implements Promotion {
 
     private void validatePromotion(String promotionName, int buy, int get, LocalDate startDate, LocalDate endDate) {
         if (promotionName == null || promotionName.isEmpty() || promotionName.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
+            throw new RuntimeException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
         } else if (buy < 1 || buy > 10 || get != 1) {
-            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
+            throw new RuntimeException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
         } else if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
+            throw new RuntimeException("[ERROR] 프로모션을 등록하는 도중 예외가 발생했습니다.");
         }
     }
 }

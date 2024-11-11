@@ -34,6 +34,10 @@ public class ConvenienceStore {
         return priceTags.get(productsName);
     }
 
+    public List<Product> getProducts(){
+        return products.values().stream().toList();
+    }
+
     private void enrollPromotions() {
         Path promotionPath = Path.of(PROMOTION_PATH);
         List<String> promotionInfos;

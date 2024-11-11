@@ -11,8 +11,7 @@ import store.promotion.PromotionImpl;
 
 import java.time.LocalDate;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class PromotionTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -36,7 +35,7 @@ class PromotionTest {
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
+        assertThatRuntimeException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
 
     @ParameterizedTest
@@ -46,7 +45,7 @@ class PromotionTest {
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
+        assertThatRuntimeException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
 
     @ParameterizedTest
@@ -59,7 +58,7 @@ class PromotionTest {
         LocalDate startDate = LocalDate.of(2024, 1, 1);
         LocalDate wrongEndDate = LocalDate.of(2023, 12, 31);
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
+        assertThatRuntimeException().isThrownBy(() -> new PromotionImpl(promotionName, buy, get, startDate, wrongEndDate)).withMessageStartingWith(ERROR_MESSAGE);
     }
 
     @ParameterizedTest
