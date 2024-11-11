@@ -1,10 +1,10 @@
 package store.products;
 
 public class OrderedProduct {
-    private Product product;
-    private int amount;
-    private int price;
-    private int promotionalAmount;
+    private final Product product;
+    private final int amount;
+    private final int price;
+    private final int promotionalAmount;
 
     public OrderedProduct(OrderingProduct orderingProduct, int price) {
         this.product = orderingProduct.getProduct();

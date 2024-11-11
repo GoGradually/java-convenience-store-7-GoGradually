@@ -35,7 +35,6 @@ public class Cashier {
 
     public OrderingProduct registerOrder(Order order) {
         Product product = convenienceStore.getProduct(order.getProductName());
-        Promotion promotion = product.getPromotion();
         return new OrderingProduct(product, order.getOffer());
     }
 

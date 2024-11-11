@@ -68,7 +68,6 @@ public class OrderingProduct {
 
     public void addPromotionalCount() {
         Promotion promotion = product.getPromotion();
-
         if (product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now()))) {
             int promotionOffer = getPromotionOffer();
             int freeAmount = promotion.getFreeAmount(promotionOffer);
