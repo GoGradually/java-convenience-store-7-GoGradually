@@ -8,7 +8,6 @@ public class Product {
     private String name;
     private int nonPromotionalAmount;
     private int promotionalAmount;
-
     private Promotion promotion;
 
     public Product(String name, Promotion promotion) {

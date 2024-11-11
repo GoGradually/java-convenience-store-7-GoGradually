@@ -17,7 +17,6 @@ public class OrderedProduct {
         return product;
     }
 
-
     public int getAmount() {
         return amount;
     }

@@ -19,7 +19,7 @@ public class OrderingProduct {
         this.offer = offer;
         if (product.getPromotion().isNullPromotion()) return;
         setDefaultPromotionalCount();
-        setPromotionalPossiblity();
+        setPromotionalPossibility();
     }
 
     public Product getProduct() {
@@ -95,7 +95,7 @@ public class OrderingProduct {
         setPromotionalAmount(promotion.getFreeAmount(promotionOffer));
     }
 
-    private void setPromotionalPossiblity() {
+    private void setPromotionalPossibility() {
         Promotion promotion = product.getPromotion();
         if (product.getPromotionalAmount() > 0 && promotion.isPromotable(LocalDate.from(now()))) {
             int nowPromotionalAmount = getPromotionalAmount();

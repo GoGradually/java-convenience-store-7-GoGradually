@@ -6,7 +6,6 @@ public class NullPromotion implements Promotion {
     private static final int OVER_BUY = 10000;
     private static NullPromotion INSTANCE = new NullPromotion();
 
-
     public static NullPromotion getInstance() {
         return INSTANCE;
     }

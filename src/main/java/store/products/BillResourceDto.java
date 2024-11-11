@@ -51,6 +51,4 @@ public class BillResourceDto {
             System.out.printf("%s               %,d     %,d\n", orderedProduct.getProduct().getName(), orderedProduct.getAmount(), orderedProduct.getPrice());
         }
     }
-
-
 }

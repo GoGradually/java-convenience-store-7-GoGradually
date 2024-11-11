@@ -9,9 +9,7 @@ import java.util.List;
 public class Cashier {
     private static final String ERROR_MESSAGE = "[ERROR] ";
     private final ConvenienceStore convenienceStore;
-
     private boolean membership = false;
-
     private final List<OrderedProduct> orderedProducts = new ArrayList<>();
 
     public Cashier(ConvenienceStore convenienceStore) {
