@@ -1,7 +1,6 @@
 package store.products;
 
 import java.util.List;
-import java.util.Map;
 
 public class BillResourceDto {
     private final List<OrderedProduct> orderedProducts;

@@ -2,17 +2,9 @@ package store.conveniencestore;
 
 import store.products.*;
 import store.promotion.Promotion;
-import store.InputController;
-import store.OutputView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static camp.nextstep.edu.missionutils.DateTimes.now;
-import static java.lang.Math.min;
 
 public class Cashier {
     private static final String ERROR_MESSAGE = "[ERROR] ";

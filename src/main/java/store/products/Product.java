@@ -2,7 +2,6 @@ package store.products;
 
 import store.promotion.Promotion;
 
-import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class Product {

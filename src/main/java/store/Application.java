@@ -1,6 +1,5 @@
 package store;
 
-import store.conveniencestore.Cashier;
 import store.conveniencestore.ConvenienceStore;
 import store.products.Order;
 
